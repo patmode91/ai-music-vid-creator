@@ -9,15 +9,28 @@ import CharacterAnimation from '../components/CharacterAnimation';
 
 const Index = () => {
   const [activeProject, setActiveProject] = useState(null);
+  const [musicFeatures, setMusicFeatures] = useState(null);
+  const [generatedVisuals, setGeneratedVisuals] = useState(null);
+  const [characterAnimation, setCharacterAnimation] = useState(null);
 
   const handleProjectCreate = () => {
-    // Logic to create a new project
     setActiveProject({ id: Date.now(), name: 'New Project', status: 'Ready to start' });
   };
 
   const handleProjectLoad = (project) => {
-    // Logic to load an existing project
     setActiveProject(project);
+  };
+
+  const handleMusicAnalysis = (features) => {
+    setMusicFeatures(features);
+  };
+
+  const handleVisualsGeneration = (visuals) => {
+    setGeneratedVisuals(visuals);
+  };
+
+  const handleAnimationGeneration = (animation) => {
+    setCharacterAnimation(animation);
   };
 
   return (
@@ -45,7 +58,10 @@ const Index = () => {
               <CardTitle>Music Integration</CardTitle>
             </CardHeader>
             <CardContent>
-              <MusicIntegration project={activeProject} />
+              <MusicIntegration 
+                project={activeProject} 
+                onMusicAnalysis={handleMusicAnalysis}
+              />
             </CardContent>
           </Card>
           <Card>
@@ -53,7 +69,11 @@ const Index = () => {
               <CardTitle>Visual Editing</CardTitle>
             </CardHeader>
             <CardContent>
-              <VisualEditing project={activeProject} />
+              <VisualEditing 
+                project={activeProject}
+                musicFeatures={musicFeatures}
+                onVisualsGeneration={handleVisualsGeneration}
+              />
             </CardContent>
           </Card>
           <Card>
@@ -61,7 +81,11 @@ const Index = () => {
               <CardTitle>Character Animation</CardTitle>
             </CardHeader>
             <CardContent>
-              <CharacterAnimation project={activeProject} />
+              <CharacterAnimation 
+                project={activeProject}
+                musicFeatures={musicFeatures}
+                onAnimationGeneration={handleAnimationGeneration}
+              />
             </CardContent>
           </Card>
         </div>
